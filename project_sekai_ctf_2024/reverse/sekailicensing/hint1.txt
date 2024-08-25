@@ -1,0 +1,1 @@
+Sekai Licensing requires you to match the hardware/OS specifications of the captured authentication sequence. The server-side has been updated to make this more clear - the VM internals are less relevant than they may seem.

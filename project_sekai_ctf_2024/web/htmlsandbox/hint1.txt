@@ -1,0 +1,1 @@
+You may want to look for a parsing differential in streamed and non-streamed HTML parsing.
