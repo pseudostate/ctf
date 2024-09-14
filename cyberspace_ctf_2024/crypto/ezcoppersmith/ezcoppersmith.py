@@ -8,8 +8,8 @@ def fermat_factorization(n: int) -> tuple[int]:
         a += 1
         b2 = gmpy2.square(a) - n
     b = gmpy2.isqrt(b2)
-    p = a + b
-    q = a - b
+    p = a - b
+    q = a + b
     return p, q
 
 def decrypt_RSA(ct: int, p: int, q: int, e: int) -> str:
