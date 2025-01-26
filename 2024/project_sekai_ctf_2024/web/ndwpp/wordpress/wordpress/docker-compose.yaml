@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  wordpress:
+    build: .
+    ports:
+      - 80:8080
+      - 10338:3000
+    environment:
+      WP_TITLE: Victim Site
+      WP_HOST: false
+      WP_ADMIN_EMAIL: admin@internal.localhost
+      APPNAME: Admin
+      APPURL: http://wordpress/
+      APPURLREGEX: ^http(|s)://.*$
+      APPLIMIT: 2
+      APPLIMITTIME: 60
+      # USE_PROXY: 1
+      DISPLAY: ${DISPLAY}
+    # volumes:
+      # uncoment this if you need to run the bot in GUI mode
+      # - /tmp/.X11-unix/:/tmp/.X11-unix/:ro
