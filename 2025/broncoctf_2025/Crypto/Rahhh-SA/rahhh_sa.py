@@ -2,7 +2,7 @@ def solution(e: int, n: int, c: list[int], p: int) -> str:
     q = n // p
     phi = (p + 1) * (q + 1) # p and q are negative.
     d = pow(e, -1, phi)
-    return "".join(chr(num % 0xFF) for num in [pow(v, d, n) for v in c])
+    return "".join(chr(m % 0xFF) for m in [pow(v, d, n) for v in c])
 
 if __name__ == "__main__":
     e = 65537
