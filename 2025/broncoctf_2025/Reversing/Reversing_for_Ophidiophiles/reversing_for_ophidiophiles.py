@@ -5,10 +5,10 @@ def solution(key: str, output: bytes) -> str:
         val = out ^ ord(key[index % len(key)])
         val -= carry
         while val < 0:
-            val += 256
+            val += 0x100
         flag += chr(val)
         carry += val
-        carry %= 256
+        carry %= 0x100
     return flag
 
 if __name__ == "__main__":
