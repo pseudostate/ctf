@@ -1,0 +1,33 @@
+PokemonCNN
+├── Initial Input: (256, 256, 4)
+│
+├── Feature Extraction Layers
+│   ├── Conv2D (4->32)
+│   ├── BatchNorm2D 
+│   ├── ReLU Activation
+│   ├── MaxPool2D(K Size = 3)
+│   ├── Dropout (p=0.25)
+│
+├── Deeper Processing
+│   ├── Conv2D(32->64)
+│   ├── BatchNorm2D (64)
+│   ├── ReLU Activation
+│   ├── MaxPool2D(K Size = 3)
+│   ├── Dropout (p=0.25)
+│
+├── More Feature Extraction
+│   ├── Conv2D(64->128)
+│   ├── BatchNorm2D
+│   ├── ReLU Activation
+│   ├── MaxPool2D(K Size = 3)
+│   ├── Dropout (p=0.25)
+│
+├── Fully Connected Layers
+│   ├── Flatten
+│   ├── Linear (512 Neurons)
+│   ├── BatchNorm1D
+│   ├── Dropout (p=0.5)
+│   ├── Linear
+│   ├── Softmax Activation
+│
+└── Output: 18 classes
