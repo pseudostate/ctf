@@ -1,7 +1,6 @@
 def tfkysf(param_1: int, param_2: int) -> int:
     param_1 &= 0xff
     param_2 &= 0xff
-    param_1_msb = (param_1 >> 7) & 1
     return param_1 >> (8 - (param_2 & 7) & 0x1f) | param_1 << (param_2 & 7)
 
 def jistcuazjdma(param_1: int, param_2: int) -> int:
@@ -41,4 +40,3 @@ def solution() -> str:
 
 if __name__ == "__main__":
     print(solution())
-    
