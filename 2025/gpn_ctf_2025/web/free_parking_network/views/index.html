@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Parking Network</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #181c20; color: #f8f8f2; margin: 0; }
+        .container { max-width: 600px; margin: 60px auto; background: #23272e; border-radius: 12px; box-shadow: 0 4px 32px #0008; padding: 32px; }
+        h1 { text-align: center; font-size: 2.5em; margin-bottom: 0.5em; }
+        textarea { width: 100%; min-height: 200px; border-radius: 8px; border: none; padding: 12px; font-size: 1em; background: #1a1d22; color: #f8f8f2; margin-bottom: 1em; }
+        button { background: #00b894; color: #fff; border: none; border-radius: 8px; padding: 12px 32px; font-size: 1.1em; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #00a383; }
+        .result { margin-top: 1.5em; text-align: center; }
+        .result a { color: #00b894; word-break: break-all; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Free Parking Network</h1>
+        <form id="uploadForm" action="/upload" method="POST">
+            <label for="htmlInput">Paste your HTML code below:</label>
+            <textarea id="htmlInput" name="html" required placeholder="&lt;h1&gt;Hello, world!&lt;/h1&gt;"></textarea>
+            <label for="headersInput">Optional HTTP Headers (one per line, e.g. <code>X-Frame-Options: DENY</code>):</label>
+            <textarea id="headersInput" name="headers" placeholder="X-Frame-Options: DENY&#10;Referrer-Policy: no-referrer"></textarea>
+            <button type="submit">Park my HTML for free</button>
+        </form>
+    </div>
+</body>
+</html>
