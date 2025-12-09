@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 40px 50px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      text-align: center;
+      max-width: 480px;
+      width: 90%;
+      animation: fadein 0.4s ease-in-out;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #444;
+      margin: 0;
+      word-break: break-all;
+    }
+
+    .flag-box {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: "Courier New", monospace;
+      margin-top: 12px;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Admin Panel</h1>
+    <p>Enjoy this cookie 🍪</p>
+    <p><strong>Your Flag:</strong></p>
+    <div class="flag-box">{{ flag }}</div>
+  </div>
+</body>
+</html>

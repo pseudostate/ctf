@@ -1,0 +1,1 @@
+FLAG = "flag{h0w_d1d_h3_b3c0m3_th3_m4n4g3r}"
