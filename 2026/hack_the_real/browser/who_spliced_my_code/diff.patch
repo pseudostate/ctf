@@ -1,0 +1,78 @@
+diff --git a/src/builtins/array-splice.tq b/src/builtins/array-splice.tq
+index 40e32de..30a92d7 100755
+--- a/src/builtins/array-splice.tq
++++ b/src/builtins/array-splice.tq
+@@ -44,9 +44,14 @@ macro DoMoveElements<FixedArrayType : type extends FixedArrayBase>(
+ 
+ macro StoreHoles<FixedArrayType : type extends FixedArrayBase>(
+     elements: FixedArrayType, holeStartIndex: Smi, holeEndIndex: Smi): void {
+-  for (let i: Smi = holeStartIndex; i < holeEndIndex; i++) {
+-    array::StoreArrayHole(elements, i);
+-  }
++    if (holeStartIndex > 0) {
++      for (let i: Smi = holeStartIndex; i < holeEndIndex; i++) {
++        array::StoreArrayHole(elements, i);
++      }
++    }
+ }
+ 
+ macro DoCopyElements<FixedArrayType : type extends FixedArrayBase>(
+@@ -97,7 +102,9 @@ FastSplice<FixedArrayType : type extends FixedArrayBase, ElementType: type>(
+       StoreHoles(UnsafeCast<FixedArrayType>(elements), newLength, length);
+     } else if (insertCount > actualDeleteCount) {
+       // If the backing store is big enough, then moving elements is enough.
+-      if (newLength <= elements.length) {
++      if (actualStart > elements.length) {}
++      else if (newLength <= elements.length) {
+         DoMoveElements(
+             UnsafeCast<FixedArrayType>(elements), dstIndex, srcIndex, count);
+       } else {
+@@ -120,7 +127,10 @@ FastSplice<FixedArrayType : type extends FixedArrayBase, ElementType: type>(
+       a, actualStart, args, 2, insertCount);
+ 
+   // Update the array's length after all the FixedArray shuffling is done.
+-  a.length = newLength;
++  if (actualStart < length) {
++    a.length = newLength;
++  }
+ }
+ 
+ transitioning macro TransitionElementsKindForInsertionIfNeeded(
+@@ -187,14 +197,29 @@ transitioning macro FastArraySplice(
+   const length: Smi = Cast<Smi>(a.length) otherwise Bailout;
+   if (originalLength != length) goto Bailout;
+ 
+-  const deletedResult: JSArray =
+-      ExtractFastJSArray(context, a, actualStart, actualDeleteCount);
++  let tempResult: JSArray;
++  if (actualStart < 0) {
++    tempResult = ExtractFastJSArray(context, a, 0, length);
++  } else if (actualDeleteCount < 0) {
++    tempResult = ExtractFastJSArray(context, a, length, 0);
++    tempResult.length = actualDeleteCount;
++  } else {
++    tempResult = ExtractFastJSArray(context, a, actualStart, actualDeleteCount);
++  }
++  const deletedResult: JSArray = tempResult;
+ 
+-  if (newLength == 0) {
++  if (newLength <= 0) {
+     a.elements = kEmptyFixedArray;
+-    a.length = 0;
++    a.length = newLength;
+     return deletedResult;
+   }
+ 
+   if (IsFastSmiOrTaggedElementsKind(elementsKind)) {
+     FastSplice<FixedArray, JSAny>(
+@@ -395,8 +420,10 @@ transitioning javascript builtin ArrayPrototypeSplice(
+   // 0);
+   //    else let actualStart be min(relativeStart, len).
+   const actualStart: Number = relativeStart < 0 ?
+-      Max((len + relativeStart), 0) :
+-      Min(relativeStart, len);
++      len + relativeStart :
++      relativeStart;
+ 
+   let insertCount: Smi;
+   let actualDeleteCount: Number;
